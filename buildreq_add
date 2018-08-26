@@ -1,0 +1,12 @@
+# This file contains additional build requirements that did not get
+# picked up automatically. One name per line, no whitespace.
+libkdepim-dev
+akonadi-contacts-dev
+akonadi-dev
+boost-dev
+gpgme-dev
+gpgme-extras
+grantleetheme-dev
+kcontacts-dev
+libkleo-dev
+libgpg-error-dev
