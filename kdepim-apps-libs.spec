@@ -6,7 +6,7 @@
 #
 Name     : kdepim-apps-libs
 Version  : 18.08.0
-Release  : 1
+Release  : 2
 URL      : https://download.kde.org/stable/applications/18.08.0/src/kdepim-apps-libs-18.08.0.tar.xz
 Source0  : https://download.kde.org/stable/applications/18.08.0/src/kdepim-apps-libs-18.08.0.tar.xz
 Source99 : https://download.kde.org/stable/applications/18.08.0/src/kdepim-apps-libs-18.08.0.tar.xz.sig
@@ -16,6 +16,7 @@ License  : GPL-2.0 LGPL-2.1
 Requires: kdepim-apps-libs-lib
 Requires: kdepim-apps-libs-license
 Requires: kdepim-apps-libs-locales
+Requires: kdepim-apps-libs-data
 BuildRequires : akonadi-contacts-dev
 BuildRequires : akonadi-dev
 BuildRequires : boost-dev
@@ -39,10 +40,19 @@ BuildRequires : qtbase-dev qtbase-extras mesa-dev
 %description
 No detailed description available
 
+%package data
+Summary: data components for the kdepim-apps-libs package.
+Group: Data
+
+%description data
+data components for the kdepim-apps-libs package.
+
+
 %package dev
 Summary: dev components for the kdepim-apps-libs package.
 Group: Development
 Requires: kdepim-apps-libs-lib
+Requires: kdepim-apps-libs-data
 Provides: kdepim-apps-libs-devel
 
 %description dev
@@ -52,6 +62,7 @@ dev components for the kdepim-apps-libs package.
 %package lib
 Summary: lib components for the kdepim-apps-libs package.
 Group: Libraries
+Requires: kdepim-apps-libs-data
 Requires: kdepim-apps-libs-license
 
 %description lib
@@ -82,7 +93,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1535254406
+export SOURCE_DATE_EPOCH=1535427549
 mkdir clr-build
 pushd clr-build
 %cmake ..
@@ -90,7 +101,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1535254406
+export SOURCE_DATE_EPOCH=1535427549
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/doc/kdepim-apps-libs
 cp COPYING %{buildroot}/usr/share/doc/kdepim-apps-libs/COPYING
@@ -103,6 +114,11 @@ popd
 
 %files
 %defattr(-,root,root,-)
+
+%files data
+%defattr(-,root,root,-)
+/usr/share/xdg/kdepim-apps-lib.categories
+/usr/share/xdg/kdepim-apps-lib.renamecategories
 
 %files dev
 %defattr(-,root,root,-)
