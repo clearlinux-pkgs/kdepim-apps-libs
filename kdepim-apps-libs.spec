@@ -5,18 +5,18 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kdepim-apps-libs
-Version  : 18.08.0
-Release  : 2
-URL      : https://download.kde.org/stable/applications/18.08.0/src/kdepim-apps-libs-18.08.0.tar.xz
-Source0  : https://download.kde.org/stable/applications/18.08.0/src/kdepim-apps-libs-18.08.0.tar.xz
-Source99 : https://download.kde.org/stable/applications/18.08.0/src/kdepim-apps-libs-18.08.0.tar.xz.sig
+Version  : 18.12.2
+Release  : 3
+URL      : https://download.kde.org/stable/applications/18.12.2/src/kdepim-apps-libs-18.12.2.tar.xz
+Source0  : https://download.kde.org/stable/applications/18.12.2/src/kdepim-apps-libs-18.12.2.tar.xz
+Source99 : https://download.kde.org/stable/applications/18.12.2/src/kdepim-apps-libs-18.12.2.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
-Requires: kdepim-apps-libs-lib
-Requires: kdepim-apps-libs-license
-Requires: kdepim-apps-libs-locales
-Requires: kdepim-apps-libs-data
+Requires: kdepim-apps-libs-data = %{version}-%{release}
+Requires: kdepim-apps-libs-lib = %{version}-%{release}
+Requires: kdepim-apps-libs-license = %{version}-%{release}
+Requires: kdepim-apps-libs-locales = %{version}-%{release}
 BuildRequires : akonadi-contacts-dev
 BuildRequires : akonadi-dev
 BuildRequires : boost-dev
@@ -35,7 +35,7 @@ BuildRequires : libkdepim-dev
 BuildRequires : libkleo-dev
 BuildRequires : pimcommon-dev
 BuildRequires : prison-dev
-BuildRequires : qtbase-dev qtbase-extras mesa-dev
+BuildRequires : qtbase-dev mesa-dev
 
 %description
 No detailed description available
@@ -51,9 +51,9 @@ data components for the kdepim-apps-libs package.
 %package dev
 Summary: dev components for the kdepim-apps-libs package.
 Group: Development
-Requires: kdepim-apps-libs-lib
-Requires: kdepim-apps-libs-data
-Provides: kdepim-apps-libs-devel
+Requires: kdepim-apps-libs-lib = %{version}-%{release}
+Requires: kdepim-apps-libs-data = %{version}-%{release}
+Provides: kdepim-apps-libs-devel = %{version}-%{release}
 
 %description dev
 dev components for the kdepim-apps-libs package.
@@ -62,8 +62,8 @@ dev components for the kdepim-apps-libs package.
 %package lib
 Summary: lib components for the kdepim-apps-libs package.
 Group: Libraries
-Requires: kdepim-apps-libs-data
-Requires: kdepim-apps-libs-license
+Requires: kdepim-apps-libs-data = %{version}-%{release}
+Requires: kdepim-apps-libs-license = %{version}-%{release}
 
 %description lib
 lib components for the kdepim-apps-libs package.
@@ -86,31 +86,32 @@ locales components for the kdepim-apps-libs package.
 
 
 %prep
-%setup -q -n kdepim-apps-libs-18.08.0
+%setup -q -n kdepim-apps-libs-18.12.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1535427549
-mkdir clr-build
+export SOURCE_DATE_EPOCH=1549861520
+mkdir -p clr-build
 pushd clr-build
 %cmake ..
-make  %{?_smp_mflags}
+make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1535427549
+export SOURCE_DATE_EPOCH=1549861520
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/kdepim-apps-libs
-cp COPYING %{buildroot}/usr/share/doc/kdepim-apps-libs/COPYING
-cp COPYING.LIB %{buildroot}/usr/share/doc/kdepim-apps-libs/COPYING.LIB
+mkdir -p %{buildroot}/usr/share/package-licenses/kdepim-apps-libs
+cp COPYING %{buildroot}/usr/share/package-licenses/kdepim-apps-libs/COPYING
+cp COPYING.LIB %{buildroot}/usr/share/package-licenses/kdepim-apps-libs/COPYING.LIB
 pushd clr-build
 %make_install
 popd
 %find_lang libkaddressbookgrantlee
 %find_lang libsendlater
+%find_lang libkaddressbookimportexport
 
 %files
 %defattr(-,root,root,-)
@@ -205,21 +206,21 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5FollowupReminder.so.5
-/usr/lib64/libKF5FollowupReminder.so.5.9.0
+/usr/lib64/libKF5FollowupReminder.so.5.10.2
 /usr/lib64/libKF5KaddressbookGrantlee.so.5
-/usr/lib64/libKF5KaddressbookGrantlee.so.5.9.0
+/usr/lib64/libKF5KaddressbookGrantlee.so.5.10.2
 /usr/lib64/libKF5KaddressbookImportExport.so.5
-/usr/lib64/libKF5KaddressbookImportExport.so.5.9.0
+/usr/lib64/libKF5KaddressbookImportExport.so.5.10.2
 /usr/lib64/libKF5KdepimDBusInterfaces.so.5
-/usr/lib64/libKF5KdepimDBusInterfaces.so.5.9.0
+/usr/lib64/libKF5KdepimDBusInterfaces.so.5.10.2
 /usr/lib64/libKF5SendLater.so.5
-/usr/lib64/libKF5SendLater.so.5.9.0
+/usr/lib64/libKF5SendLater.so.5.10.2
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/kdepim-apps-libs/COPYING
-/usr/share/doc/kdepim-apps-libs/COPYING.LIB
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/kdepim-apps-libs/COPYING
+/usr/share/package-licenses/kdepim-apps-libs/COPYING.LIB
 
-%files locales -f libkaddressbookgrantlee.lang -f libsendlater.lang
+%files locales -f libkaddressbookgrantlee.lang -f libsendlater.lang -f libkaddressbookimportexport.lang
 %defattr(-,root,root,-)
 
