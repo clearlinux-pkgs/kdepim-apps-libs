@@ -10,3 +10,5 @@ grantleetheme-dev
 kcontacts-dev
 libkleo-dev
 libgpg-error-dev
+kimap-dev
+kimap-staticdev
