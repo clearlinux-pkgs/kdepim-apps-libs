@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kdepim-apps-libs
-Version  : 19.04.3
-Release  : 13
-URL      : https://download.kde.org/stable/applications/19.04.3/src/kdepim-apps-libs-19.04.3.tar.xz
-Source0  : https://download.kde.org/stable/applications/19.04.3/src/kdepim-apps-libs-19.04.3.tar.xz
-Source99 : https://download.kde.org/stable/applications/19.04.3/src/kdepim-apps-libs-19.04.3.tar.xz.sig
+Version  : 19.08.0
+Release  : 14
+URL      : https://download.kde.org/stable/applications/19.08.0/src/kdepim-apps-libs-19.08.0.tar.xz
+Source0  : https://download.kde.org/stable/applications/19.08.0/src/kdepim-apps-libs-19.08.0.tar.xz
+Source1 : https://download.kde.org/stable/applications/19.08.0/src/kdepim-apps-libs-19.08.0.tar.xz.sig
 Summary  : KDE PIM mail related libraries
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
@@ -89,16 +89,17 @@ locales components for the kdepim-apps-libs package.
 
 
 %prep
-%setup -q -n kdepim-apps-libs-19.04.3
+%setup -q -n kdepim-apps-libs-19.08.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1563038141
+export SOURCE_DATE_EPOCH=1565930511
 mkdir -p clr-build
 pushd clr-build
+# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -112,7 +113,7 @@ make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1563038141
+export SOURCE_DATE_EPOCH=1565930511
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kdepim-apps-libs
 cp COPYING %{buildroot}/usr/share/package-licenses/kdepim-apps-libs/COPYING
@@ -129,8 +130,8 @@ popd
 
 %files data
 %defattr(-,root,root,-)
-/usr/share/xdg/kdepim-apps-lib.categories
-/usr/share/xdg/kdepim-apps-lib.renamecategories
+/usr/share/qlogging-categories5/kdepim-apps-lib.categories
+/usr/share/qlogging-categories5/kdepim-apps-lib.renamecategories
 
 %files dev
 %defattr(-,root,root,-)
@@ -217,15 +218,15 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5FollowupReminder.so.5
-/usr/lib64/libKF5FollowupReminder.so.5.11.3
+/usr/lib64/libKF5FollowupReminder.so.5.12.0
 /usr/lib64/libKF5KaddressbookGrantlee.so.5
-/usr/lib64/libKF5KaddressbookGrantlee.so.5.11.3
+/usr/lib64/libKF5KaddressbookGrantlee.so.5.12.0
 /usr/lib64/libKF5KaddressbookImportExport.so.5
-/usr/lib64/libKF5KaddressbookImportExport.so.5.11.3
+/usr/lib64/libKF5KaddressbookImportExport.so.5.12.0
 /usr/lib64/libKF5KdepimDBusInterfaces.so.5
-/usr/lib64/libKF5KdepimDBusInterfaces.so.5.11.3
+/usr/lib64/libKF5KdepimDBusInterfaces.so.5.12.0
 /usr/lib64/libKF5SendLater.so.5
-/usr/lib64/libKF5SendLater.so.5.11.3
+/usr/lib64/libKF5SendLater.so.5.12.0
 
 %files license
 %defattr(0644,root,root,0755)
