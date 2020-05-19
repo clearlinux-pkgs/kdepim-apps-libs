@@ -5,12 +5,12 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kdepim-apps-libs
-Version  : 20.04.0
-Release  : 25
-URL      : https://download.kde.org/stable/release-service/20.04.0/src/kdepim-apps-libs-20.04.0.tar.xz
-Source0  : https://download.kde.org/stable/release-service/20.04.0/src/kdepim-apps-libs-20.04.0.tar.xz
-Source1  : https://download.kde.org/stable/release-service/20.04.0/src/kdepim-apps-libs-20.04.0.tar.xz.sig
-Summary  : KDE PIM mail related libraries
+Version  : 20.04.1
+Release  : 26
+URL      : https://download.kde.org/stable/release-service/20.04.1/src/kdepim-apps-libs-20.04.1.tar.xz
+Source0  : https://download.kde.org/stable/release-service/20.04.1/src/kdepim-apps-libs-20.04.1.tar.xz
+Source1  : https://download.kde.org/stable/release-service/20.04.1/src/kdepim-apps-libs-20.04.1.tar.xz.sig
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
 Requires: kdepim-apps-libs-data = %{version}-%{release}
@@ -22,14 +22,22 @@ BuildRequires : akonadi-dev
 BuildRequires : boost-dev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
+BuildRequires : extra-cmake-modules-data
 BuildRequires : gpgme-dev
 BuildRequires : gpgme-extras
 BuildRequires : grantlee-dev
 BuildRequires : grantleetheme-dev
+BuildRequires : kconfig-dev
+BuildRequires : kconfigwidgets-dev
 BuildRequires : kcontacts-dev
+BuildRequires : kcoreaddons-dev
+BuildRequires : ki18n-dev
 BuildRequires : kimap-dev
 BuildRequires : kimap-staticdev
+BuildRequires : kio-dev
 BuildRequires : kmime-dev
+BuildRequires : kservice-dev
+BuildRequires : kwidgetsaddons-dev
 BuildRequires : libgpg-error-dev
 BuildRequires : libkdepim-dev
 BuildRequires : libkleo-dev
@@ -54,7 +62,6 @@ Group: Development
 Requires: kdepim-apps-libs-lib = %{version}-%{release}
 Requires: kdepim-apps-libs-data = %{version}-%{release}
 Provides: kdepim-apps-libs-devel = %{version}-%{release}
-Requires: kdepim-apps-libs = %{version}-%{release}
 Requires: kdepim-apps-libs = %{version}-%{release}
 
 %description dev
@@ -88,36 +95,35 @@ locales components for the kdepim-apps-libs package.
 
 
 %prep
-%setup -q -n kdepim-apps-libs-20.04.0
-cd %{_builddir}/kdepim-apps-libs-20.04.0
+%setup -q -n kdepim-apps-libs-20.04.1
+cd %{_builddir}/kdepim-apps-libs-20.04.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1587699699
+export SOURCE_DATE_EPOCH=1589912602
 mkdir -p clr-build
 pushd clr-build
-# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %cmake ..
 make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1587699699
+export SOURCE_DATE_EPOCH=1589912602
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kdepim-apps-libs
-cp %{_builddir}/kdepim-apps-libs-20.04.0/COPYING %{buildroot}/usr/share/package-licenses/kdepim-apps-libs/6a3bf83ab62e047649bdf91a17c9311737cede0f
-cp %{_builddir}/kdepim-apps-libs-20.04.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/kdepim-apps-libs/c914b1f9fc73a1ae187da32447bd161823f8b9e8
+cp %{_builddir}/kdepim-apps-libs-20.04.1/COPYING %{buildroot}/usr/share/package-licenses/kdepim-apps-libs/6a3bf83ab62e047649bdf91a17c9311737cede0f
+cp %{_builddir}/kdepim-apps-libs-20.04.1/COPYING.LIB %{buildroot}/usr/share/package-licenses/kdepim-apps-libs/c914b1f9fc73a1ae187da32447bd161823f8b9e8
 pushd clr-build
 %make_install
 popd
@@ -218,15 +224,15 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5FollowupReminder.so.5
-/usr/lib64/libKF5FollowupReminder.so.5.14.0
+/usr/lib64/libKF5FollowupReminder.so.5.14.1
 /usr/lib64/libKF5KaddressbookGrantlee.so.5
-/usr/lib64/libKF5KaddressbookGrantlee.so.5.14.0
+/usr/lib64/libKF5KaddressbookGrantlee.so.5.14.1
 /usr/lib64/libKF5KaddressbookImportExport.so.5
-/usr/lib64/libKF5KaddressbookImportExport.so.5.14.0
+/usr/lib64/libKF5KaddressbookImportExport.so.5.14.1
 /usr/lib64/libKF5KdepimDBusInterfaces.so.5
-/usr/lib64/libKF5KdepimDBusInterfaces.so.5.14.0
+/usr/lib64/libKF5KdepimDBusInterfaces.so.5.14.1
 /usr/lib64/libKF5SendLater.so.5
-/usr/lib64/libKF5SendLater.so.5.14.0
+/usr/lib64/libKF5SendLater.so.5.14.1
 
 %files license
 %defattr(0644,root,root,0755)
