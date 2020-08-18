@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kdepim-apps-libs
-Version  : 20.04.2
-Release  : 27
-URL      : https://download.kde.org/stable/release-service/20.04.2/src/kdepim-apps-libs-20.04.2.tar.xz
-Source0  : https://download.kde.org/stable/release-service/20.04.2/src/kdepim-apps-libs-20.04.2.tar.xz
-Source1  : https://download.kde.org/stable/release-service/20.04.2/src/kdepim-apps-libs-20.04.2.tar.xz.sig
+Version  : 20.08.0
+Release  : 28
+URL      : https://download.kde.org/stable/release-service/20.08.0/src/kdepim-apps-libs-20.08.0.tar.xz
+Source0  : https://download.kde.org/stable/release-service/20.08.0/src/kdepim-apps-libs-20.08.0.tar.xz
+Source1  : https://download.kde.org/stable/release-service/20.08.0/src/kdepim-apps-libs-20.08.0.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
@@ -36,13 +36,10 @@ BuildRequires : kimap-dev
 BuildRequires : kimap-staticdev
 BuildRequires : kio-dev
 BuildRequires : kmime-dev
-BuildRequires : kservice-dev
-BuildRequires : kwidgetsaddons-dev
 BuildRequires : libgpg-error-dev
 BuildRequires : libkdepim-dev
 BuildRequires : libkleo-dev
 BuildRequires : pimcommon-dev
-BuildRequires : prison-dev
 BuildRequires : qtbase-dev mesa-dev
 
 %description
@@ -95,15 +92,15 @@ locales components for the kdepim-apps-libs package.
 
 
 %prep
-%setup -q -n kdepim-apps-libs-20.04.2
-cd %{_builddir}/kdepim-apps-libs-20.04.2
+%setup -q -n kdepim-apps-libs-20.08.0
+cd %{_builddir}/kdepim-apps-libs-20.08.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1591931547
+export SOURCE_DATE_EPOCH=1597734291
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -115,20 +112,19 @@ export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %cmake ..
-make  %{?_smp_mflags}  VERBOSE=1
+make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1591931547
+export SOURCE_DATE_EPOCH=1597734291
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kdepim-apps-libs
-cp %{_builddir}/kdepim-apps-libs-20.04.2/COPYING %{buildroot}/usr/share/package-licenses/kdepim-apps-libs/6a3bf83ab62e047649bdf91a17c9311737cede0f
-cp %{_builddir}/kdepim-apps-libs-20.04.2/COPYING.LIB %{buildroot}/usr/share/package-licenses/kdepim-apps-libs/c914b1f9fc73a1ae187da32447bd161823f8b9e8
+cp %{_builddir}/kdepim-apps-libs-20.08.0/COPYING %{buildroot}/usr/share/package-licenses/kdepim-apps-libs/6a3bf83ab62e047649bdf91a17c9311737cede0f
+cp %{_builddir}/kdepim-apps-libs-20.08.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/kdepim-apps-libs/c914b1f9fc73a1ae187da32447bd161823f8b9e8
 pushd clr-build
 %make_install
 popd
 %find_lang libkaddressbookgrantlee
-%find_lang libsendlater
 %find_lang libkaddressbookimportexport
 
 %files
@@ -137,12 +133,9 @@ popd
 %files data
 %defattr(-,root,root,-)
 /usr/share/qlogging-categories5/kdepim-apps-lib.categories
-/usr/share/qlogging-categories5/kdepim-apps-lib.renamecategories
 
 %files dev
 %defattr(-,root,root,-)
-/usr/include/KF5/FollowupReminder/FollowUpReminderInfo
-/usr/include/KF5/FollowupReminder/FollowUpReminderUtil
 /usr/include/KF5/KAddressBookImportExport/KAddressBookContactSelectionDialog
 /usr/include/KF5/KAddressBookImportExport/KAddressBookContactSelectionWidget
 /usr/include/KF5/KAddressBookImportExport/KAddressBookExportSelectionWidget
@@ -154,16 +147,6 @@ popd
 /usr/include/KF5/KaddressbookGrantlee/GrantleeContactGroupFormatter
 /usr/include/KF5/KaddressbookGrantlee/GrantleeContactViewer
 /usr/include/KF5/KaddressbookGrantlee/GrantleePrint
-/usr/include/KF5/KdepimDBusInterfaces/ReminderClient
-/usr/include/KF5/KdepimDBusInterfaces/UriHandler
-/usr/include/KF5/SendLater/SendLaterDialog
-/usr/include/KF5/SendLater/SendLaterInfo
-/usr/include/KF5/SendLater/SendLaterUtil
-/usr/include/KF5/followupreminder/followupreminder_export.h
-/usr/include/KF5/followupreminder/followupreminderagentsettings.h
-/usr/include/KF5/followupreminder/followupreminderinfo.h
-/usr/include/KF5/followupreminder/followupreminderutil.h
-/usr/include/KF5/followupreminder_version.h
 /usr/include/KF5/kaddressbookgrantlee/grantleecontactformatter.h
 /usr/include/KF5/kaddressbookgrantlee/grantleecontactgroupformatter.h
 /usr/include/KF5/kaddressbookgrantlee/grantleecontactviewer.h
@@ -180,20 +163,6 @@ popd
 /usr/include/KF5/kaddressbookimportexport/kaddressbookimportexportplugininterface.h
 /usr/include/KF5/kaddressbookimportexport/kaddressbookimportexportpluginmanager.h
 /usr/include/KF5/kaddressbookimportexport_version.h
-/usr/include/KF5/kdepimdbusinterfaces/kdepimdbusinterfaces_export.h
-/usr/include/KF5/kdepimdbusinterfaces/reminderclient.h
-/usr/include/KF5/kdepimdbusinterfaces/urihandler.h
-/usr/include/KF5/kdepimdbusinterfaces_version.h
-/usr/include/KF5/sendlater/sendlater_export.h
-/usr/include/KF5/sendlater/sendlateragentsettings.h
-/usr/include/KF5/sendlater/sendlaterdialog.h
-/usr/include/KF5/sendlater/sendlaterinfo.h
-/usr/include/KF5/sendlater/sendlaterutil.h
-/usr/include/KF5/sendlater_version.h
-/usr/lib64/cmake/KF5FollowupReminder/KF5FollowupReminderConfig.cmake
-/usr/lib64/cmake/KF5FollowupReminder/KF5FollowupReminderConfigVersion.cmake
-/usr/lib64/cmake/KF5FollowupReminder/KF5FollowupReminderTargets-relwithdebinfo.cmake
-/usr/lib64/cmake/KF5FollowupReminder/KF5FollowupReminderTargets.cmake
 /usr/lib64/cmake/KF5KaddressbookGrantlee/KF5KaddressbookGrantleeConfig.cmake
 /usr/lib64/cmake/KF5KaddressbookGrantlee/KF5KaddressbookGrantleeConfigVersion.cmake
 /usr/lib64/cmake/KF5KaddressbookGrantlee/KF5KaddressbookGrantleeTargets-relwithdebinfo.cmake
@@ -202,43 +171,23 @@ popd
 /usr/lib64/cmake/KF5KaddressbookImportExport/KF5KaddressbookImportExportConfigVersion.cmake
 /usr/lib64/cmake/KF5KaddressbookImportExport/KF5KaddressbookImportExportTargets-relwithdebinfo.cmake
 /usr/lib64/cmake/KF5KaddressbookImportExport/KF5KaddressbookImportExportTargets.cmake
-/usr/lib64/cmake/KF5KdepimDBusInterfaces/KF5KdepimDBusInterfacesConfig.cmake
-/usr/lib64/cmake/KF5KdepimDBusInterfaces/KF5KdepimDBusInterfacesConfigVersion.cmake
-/usr/lib64/cmake/KF5KdepimDBusInterfaces/KF5KdepimDBusInterfacesTargets-relwithdebinfo.cmake
-/usr/lib64/cmake/KF5KdepimDBusInterfaces/KF5KdepimDBusInterfacesTargets.cmake
-/usr/lib64/cmake/KF5SendLater/KF5SendLaterConfig.cmake
-/usr/lib64/cmake/KF5SendLater/KF5SendLaterConfigVersion.cmake
-/usr/lib64/cmake/KF5SendLater/KF5SendLaterTargets-relwithdebinfo.cmake
-/usr/lib64/cmake/KF5SendLater/KF5SendLaterTargets.cmake
-/usr/lib64/libKF5FollowupReminder.so
 /usr/lib64/libKF5KaddressbookGrantlee.so
 /usr/lib64/libKF5KaddressbookImportExport.so
-/usr/lib64/libKF5KdepimDBusInterfaces.so
-/usr/lib64/libKF5SendLater.so
-/usr/lib64/qt5/mkspecs/modules/qt_FollowupReminder.pri
 /usr/lib64/qt5/mkspecs/modules/qt_KaddressbookGrantlee.pri
 /usr/lib64/qt5/mkspecs/modules/qt_KaddressbookImportExport.pri
-/usr/lib64/qt5/mkspecs/modules/qt_KdepimDBusInterfaces.pri
-/usr/lib64/qt5/mkspecs/modules/qt_SendLater.pri
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/libKF5FollowupReminder.so.5
-/usr/lib64/libKF5FollowupReminder.so.5.14.2
 /usr/lib64/libKF5KaddressbookGrantlee.so.5
-/usr/lib64/libKF5KaddressbookGrantlee.so.5.14.2
+/usr/lib64/libKF5KaddressbookGrantlee.so.5.15.0
 /usr/lib64/libKF5KaddressbookImportExport.so.5
-/usr/lib64/libKF5KaddressbookImportExport.so.5.14.2
-/usr/lib64/libKF5KdepimDBusInterfaces.so.5
-/usr/lib64/libKF5KdepimDBusInterfaces.so.5.14.2
-/usr/lib64/libKF5SendLater.so.5
-/usr/lib64/libKF5SendLater.so.5.14.2
+/usr/lib64/libKF5KaddressbookImportExport.so.5.15.0
 
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/kdepim-apps-libs/6a3bf83ab62e047649bdf91a17c9311737cede0f
 /usr/share/package-licenses/kdepim-apps-libs/c914b1f9fc73a1ae187da32447bd161823f8b9e8
 
-%files locales -f libkaddressbookgrantlee.lang -f libsendlater.lang -f libkaddressbookimportexport.lang
+%files locales -f libkaddressbookgrantlee.lang -f libkaddressbookimportexport.lang
 %defattr(-,root,root,-)
 
